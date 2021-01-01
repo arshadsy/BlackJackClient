@@ -1,20 +1,18 @@
-import React, { Component } from 'react';
-import { Deck } from "./CardData";
-import { GameBoard } from "./GameBoard";
-const GameMenu = () => {
+import React from 'react';
+const GameMenu = ({showMenu,setShowMenu}) => {
     const playGame = (e)=>{
-        console.log(e.target)
+        setShowMenu(false);
         e.preventDefault();
     }
-    const logout = (e)=>{
-        console.log(e.target.name)
-        e.preventDefault();
-    }
+    if(showMenu){
     return ( <>
-    <GameBoard  />
     <button name='play' className="btn btn-success" onClick={(e)=>playGame(e)}>Play Game</button>
-    <button name='logout' className="btn btn-danger" onClick={(e)=>logout(e)}>Logout</button>
     </> );
+    }
+    else
+    {
+        return(<></>);
+    }
 }
  
 export default GameMenu;
