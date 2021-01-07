@@ -1,17 +1,25 @@
 import React from 'react';
-const GameMenu = ({showMenu,setShowMenu}) => {
+const GameMenu = ({PlayButtonShow, QuitButtonShow, setPlayButtonShow, setQuitButtonShow}) => {
     const playGame = (e)=>{
-        setShowMenu(false);
+        setPlayButtonShow(false);
+        setQuitButtonShow(true);
         e.preventDefault();
     }
-    if(showMenu){
+    const quitGame = (e)=>{
+        setPlayButtonShow(true);
+        setQuitButtonShow(false);
+        e.preventDefault();
+    }
+    if(PlayButtonShow){
     return ( <>
     <button name='play' className="btn btn-success" onClick={(e)=>playGame(e)}>Play Game</button>
     </> );
     }
-    else
+    else if (QuitButtonShow)
     {
-        return(<></>);
+    return ( <>
+    <button name='play' className="btn btn-danger" onClick={(e)=>quitGame(e)}>Quit Game</button>
+        </>);
     }
 }
  

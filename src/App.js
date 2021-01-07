@@ -5,11 +5,12 @@ import React, { useState, useEffect } from 'react';
 import PlayButtons from './BlackjackGame/PlayButtons';
 import { GameBoard } from './BlackjackGame/GameBoard';
 function App() {
-const [showMenu,setShowMenu] = useState(true);
+const [PlayButtonShow,setPlayButtonShow] = useState(true);
+const [QuitButtonShow,setQuitButtonShow] = useState(false);
   return (
     <div className="App">
       <MDBContainer>
-          <GameMenu showMenu={showMenu} setShowMenu={setShowMenu}/>
+        <GameMenu PlayButtonShow={PlayButtonShow} QuitButtonShow={QuitButtonShow} setPlayButtonShow={setPlayButtonShow} setQuitButtonShow={setQuitButtonShow }/>
           <GameBoard  />
           <PlayButtons/>
       </MDBContainer>
