@@ -11,10 +11,14 @@ const CardValue = ['A','K','Q','J','1',
 ];
 const CardType=['S','C','H','D'];
 
-const Deck = CardType.map(ty => {
-    return CardValue.map(va => {
-        return `${ty}-${va}`
-    });
-});
+// const Deck = CardValue.map(ty => {
+//     return CardType.map(va => {
+//         return `${ty}-${va}`
+//     });
+// });
+const Deck = [];
+
+CardValue.forEach(cv => CardType.forEach(ct => { Deck.push( `${ct}-${cv}`) }));
+
 
 export {Deck};
