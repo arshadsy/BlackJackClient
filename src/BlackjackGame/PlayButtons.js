@@ -23,7 +23,7 @@ console.log(e.target)
                 Stand
             </MDBBtn>
             <MDBBtn onClick={(e) => doubleBet(e)} color="warning" >
-                Stand
+                Double Stand
             </MDBBtn>
         </div>
     )
