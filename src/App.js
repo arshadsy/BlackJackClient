@@ -4,7 +4,8 @@ import GameMenu from "./BlackjackGame/Menu";
 import React, { useState, useEffect } from 'react';
 import PlayButtons from './BlackjackGame/PlayButtons';
 import { GameBoard } from './BlackjackGame/GameBoard';
-import { Deck} from './BlackjackGame/CardData';
+import { Deck } from './BlackjackGame/CardData';
+
 function App() {
 const [PlayButtonShow,setPlayButtonShow] = useState(true);
   const [QuitButtonShow, setQuitButtonShow] = useState(false);
