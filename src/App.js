@@ -11,17 +11,17 @@ const [PlayButtonShow,setPlayButtonShow] = useState(true);
   const [QuitButtonShow, setQuitButtonShow] = useState(false);
   const [DeckShuffleld, setDeckShuffeled] = useState([]);
   const [DealerDeck, setDealerDeck] = useState([]);
-  const [PlayerDeck, serPlayerDeck] = useState([]);
+  const [PlayerDeck, setPlayerDeck] = useState([]);
   useEffect(() => {
     console.log("shuffleStart");
     shuffleDeck(setDeckShuffeled);
 console.log("shuffleEnd");
-  }, () => { });
+  }, () => []);
 
   return (
-    <div className="App">
+    <div className="App m-1">
         <GameMenu PlayButtonShow={PlayButtonShow} QuitButtonShow={QuitButtonShow} setPlayButtonShow={setPlayButtonShow} setQuitButtonShow={setQuitButtonShow }/>
-          <GameBoard  />
+          <GameBoard playercards={PlayerDeck}  />
       <PlayButtons />
     
     </div>

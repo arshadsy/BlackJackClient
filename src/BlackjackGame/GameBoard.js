@@ -1,18 +1,21 @@
 import React from 'react';
+import { CardUI } from './CardUI';
 
 
-export const GameBoard = () => {
+export const GameBoard = (dealerCount,playercards) => {
     
     return (
     <div >
-        <div >Dealer</div>
-        <div className='game-deck'>
-          <div className='card-back'>
-          </div>card
-          <div className='card-back'>
+        <div className='game-deck' id='DealerDeck'>
+        <div ><p>Dealer</p>
+          [...Array()]
         </div>
         </div>
-        <div>Player</div>
+          <div className='game-deck' id='PlayerDeck'>
+        <div>Player
+            <CardUI cards={playercards} />
+          </div>
+        </div>
       
       </div>
     )

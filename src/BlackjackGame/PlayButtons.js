@@ -15,16 +15,16 @@ console.log(e.target)
 console.log(e.target)
     }
     return (
-        <div>
-            <div onClick={(e) => hit(e)} color="info" >
+        <div className='actions text-start ms-2'>
+            <button onClick={(e) => hit(e)} className="btn btn-info m-1" >
                 Hit
-            </div>
-            <div onClick={(e) => stand(e)} color="success" >
+            </button>
+            <button onClick={(e) => stand(e)} className="btn btn-primary m-1" >
                 Stand
-            </div>
-            <div onClick={(e) => doubleBet(e)} color="warning" >
+            </button>
+            <button onClick={(e) => doubleBet(e)} className="btn btn-warning m-1" >
                 Double Stand
-            </div>
+            </button>
         </div>
     )
 }
