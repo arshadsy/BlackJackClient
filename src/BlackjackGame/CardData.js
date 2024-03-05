@@ -1,4 +1,8 @@
-const CardValue = ['A', 'K', 'Q', 'J', '1',
+const CardValue = [
+    'A',
+    'K',
+    'Q',
+    'J',
     '2',
     '3',
     '4',
