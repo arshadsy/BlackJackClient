@@ -1,12 +1,13 @@
 import React from 'react'
 
-function PlayButtons({ dealerDeck, playerHits, deck, enableHit, enableStand, enableDouble }) {
+function PlayButtons({ playerStands, playerHits, playerDoubles, enableHit, enableStand, enableDouble }) {
     const hit = (e) => {
         playerHits()
         e.preventDefault();
         console.log(e.target.name)
     }
     const stand = (e) => {
+        playerStands()
         e.preventDefault();
         console.log(e.target.name)
     }

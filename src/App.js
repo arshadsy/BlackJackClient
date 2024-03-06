@@ -29,8 +29,8 @@ function App() {
 const shuffleDeck = (fn) => {
   let tempDeck = Deck.map(a => a);
   for (let i = 0; i < 100; i++) {
-    let rand1 = Math.floor(Math.random() * 100 % 56);
-    let rand2 = Math.floor(Math.random() * 100 % 56);
+    let rand1 = Math.floor(Math.random() * 100 % 52);
+    let rand2 = Math.floor(Math.random() * 100 % 52);
     let tempCard = tempDeck[rand1];
     tempDeck[rand1] = tempDeck[rand2];
     tempDeck[rand2] = tempCard;
