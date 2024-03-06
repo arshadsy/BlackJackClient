@@ -12,17 +12,23 @@ function App() {
   const [PlayButtonShow, setPlayButtonShow] = useState(true);
   const [QuitButtonShow, setQuitButtonShow] = useState(false);
   const [DeckShuffleld, setDeckShuffeled] = useState([]);
+  // useEffect(() => {
+  //   console.log("shuffleStart");
+  //   shuffleDeck(setDeckShuffeled);
+  //   console.log("shuffleEnd");
+  // }, []);
   useEffect(() => {
-    console.log("shuffleStart");
-    shuffleDeck(setDeckShuffeled);
-    console.log("shuffleEnd");
-  }, []);
-
+    if (QuitButtonShow) {
+      shuffleDeck(setDeckShuffeled);
+    } else if (PlayButtonShow) {
+      setDeckShuffeled(st => []);
+    }
+  }, [QuitButtonShow])
   return (
 
     <div className="App m-1">
       <GameMenu PlayButtonShow={PlayButtonShow} QuitButtonShow={QuitButtonShow} setPlayButtonShow={setPlayButtonShow} setQuitButtonShow={setQuitButtonShow} />
-      <GameBoard deckShuffeled={DeckShuffleld} />
+      {QuitButtonShow ? <GameBoard deckShuffeled={DeckShuffleld} /> : <div className="rounded-2 bg-info bg-opacity-25  ">Play Game</div>}
     </div>
   );
 }

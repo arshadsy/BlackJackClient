@@ -21,6 +21,11 @@ export const GameBoard = ({ deckShuffeled }) => {
     setDealerDeck(deckShuffeled.slice(-2))
     setPlayerCards(deckShuffeled.slice(-4, -2))
     setDeck((st) => deckShuffeled.slice(0, -4))
+    setEnableHit(true)
+    setEnableStand(true)
+    setEnableDouble(true)
+    setWinBanner('')
+    setPlayerStands(false)
   }, [deckShuffeled])
 
   const PlayerHits = () => {
@@ -32,18 +37,29 @@ export const GameBoard = ({ deckShuffeled }) => {
   }
 
   const DealerTurn = () => {
-    setDealerDeck((st) => [...st, deck[-1]])
+    console.log(`player stands ${playerStands}`)
+    setDealerDeck((st) => [...st, deck[(deck.length) - 1]])
     setDeck((st) => st.slice(0, -1))
   }
 
   useEffect(() => {
-    if (dealerScore < 21 && playerStands) DealerTurn()
-  }, [dealerScore])
+    const scoreUpdate = setInterval(() => {
+      console.log(`dealer score ${dealerScore}`)
+      if (dealerScore < 21 && playerStands)
+        DealerTurn()
+    }, 1000
+    )
+    return () => clearInterval(scoreUpdate)
+  }, [dealerScore, playerStands])
+
+  useEffect(() => {
+    setDealerScore((st) => calculateScore(dealerDeck))
+  }, [dealerDeck])
 
   const calculateScore = (inputcards = []) => {
     let score = 0
     let aceFound = false;
-    const cards = inputcards.map(s => { if (s !== undefined) return s })
+    const cards = inputcards.filter(s => { if (s !== undefined) return s })
     console.log('cards')
     console.log(cards)
     if (cards && cards.length > 0) {
@@ -62,16 +78,18 @@ export const GameBoard = ({ deckShuffeled }) => {
     return score
   }
 
-  const checkPlayerWin = (score, opScore, playerStandFlag = true) => {
+  const checkPlayerWin = (score, opScore, playerStandFlag = playerStands) => {
     let winScore = 21;
     if (score < winScore && playerStandFlag === false) return
     if (score > winScore) return 'Lose'
-    if (opScore > winScore) return 'Win'
     let playerGap = winScore - score;
     let dealerrGap = winScore - opScore;
+    if (dealerrGap < 0) return 'Win'
+    if (playerGap < 0) return 'Lose'
     if ((score === winScore && opScore === winScore) || playerGap === dealerrGap) return 'Draw'
     if (playerGap < dealerrGap) return 'Win'
     if (playerGap > dealerrGap) return 'Lose'
+    if (opScore > winScore) return 'Win'
   }
 
   const scoreCheck = (deck = []) => {
@@ -79,9 +97,13 @@ export const GameBoard = ({ deckShuffeled }) => {
   }
 
   const PlayerStandAction = () => {
-    setEnableHit(st => false);
     setPlayerStands(st => true);
-
+    setEnableHit(st => false);
+    setEnableStand(st => false);
+    setEnableDouble(st => false);
+    // DealerTurn();
+    // setPlayerScore((st) => calculateScore(playerCards))
+    setDealerScore((st) => calculateScore(dealerDeck))
   }
 
   useEffect(() => {
@@ -94,6 +116,9 @@ export const GameBoard = ({ deckShuffeled }) => {
     const winCheck = checkPlayerWin(playerScore, dealerScore, playerStands)
     if (winCheck !== undefined) {
       setWinBanner(s => winCheck)
+      setEnableHit(false)
+      setEnableStand(false)
+      setEnableDouble(false)
     }
   }, [playerScore, dealerScore])
 
@@ -101,7 +126,7 @@ export const GameBoard = ({ deckShuffeled }) => {
     <div >
       <div className='game-deck' id='DealerDeck'>
         <div ><p>Dealer</p>
-          <DealerSide dealerCards={dealerDeck} />
+          {playerStands == false ? <DealerSide dealerCards={dealerDeck} /> : <CardUI cards={dealerDeck} />}
           {dealerScore && playerStands === false ? <div></div> : <div>Score:{dealerScore}</div>}
         </div>
       </div>
