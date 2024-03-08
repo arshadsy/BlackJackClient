@@ -1,8 +1,8 @@
 - [x] Game Board
-- [] Pull Card From Deck
+- [ ] Pull Card From Deck
 - [x] Hit
 - [x] Stand
-- [] double
+- [ ] double
 - [x] Quit
 
 ## User Story
